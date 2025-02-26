@@ -1,0 +1,224 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 26 Feb 2025, 20:06:47
+    Author     : Shashan(ShashanPrabo
+*/
+
+
+:root {
+  --orange: #FFA500;
+}
+
+body{
+    font-family: Georgia, monospace;
+}
+
+
+header{
+    background-color: #1A1A1A
+}
+
+.header-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: orange;
+    margin-bottom: 0;
+  }
+
+  .header-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+
+.black-tone2{
+    color: #1A1A1A
+}
+
+.text-orange {
+  color: var(--orange) !important;
+}
+
+
+.btn-orange {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+.btn-orange:hover {
+  background-color: #e59400;
+  border-color: #e59400;
+}
+
+
+.btn-outline-orange {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.btn-outline-orange:hover {
+  background-color: var(--orange);
+  color: white;
+}
+
+
+.bg-black {
+  background-color: black;
+}
+
+.company-name{
+font-weight: 800px
+}
+
+
+/*Modern Body Section */
+section {
+  padding: 100px 0; 
+}
+
+h2.display-4 {
+  font-size: 3rem; 
+  font-weight: 700;
+  color: white; 
+}
+
+p.lead {
+  font-size: 1.25rem;
+  color: #ddd; 
+}
+
+.btn-lg {
+  padding: 12px 40px; 
+  font-size: 1.2rem;
+}
+
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.rounded {
+  border-radius: 15px; 
+}
+
+.shadow {
+  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.3); 
+}
+
+
+
+/* Customer Reviews Section */
+.bg-lighttone {
+  background-color: #FBFBFB; 
+}
+
+.carousel-item {
+  padding: 40px 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #1A1A1A; 
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.carousel-indicators button {
+  background-color: #1A1A1A; 
+}
+
+.star-rating {
+  color: var(--orange); 
+  font-size: 1.5rem;
+}
+
+.rounded-circle {
+  border: 3px solid #1A1A1A; 
+}
+
+
+/* Footer Section */
+footer {
+  background-color: black;
+  color: white;
+}
+
+footer a:hover {
+  color: var(--orange) !important; 
+}
+
+footer .text-orange {
+  color: var(--orange);
+}
+
+footer .fab {
+  transition: color 0.3s ease;
+}
+
+footer .fab:hover {
+  color: var(--orange); 
+}
+
+
+
+
+
+/*** Sign In JSP***/
+
+/* Background Image for SignIn Page */
+.signin-page {
+ background-image: url('../Assets/bgimage2.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-color: #000000; 
+}
+
+.signin-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(0, 0, 0, 0.9)); 
+  z-index: -1; 
+}
+
+/* Active State for Toggle Buttons */
+.btn-outline-orange.active {
+  background-color: var(--orange);
+  color: white;
+}
+
+/* Card Styling */
+.card {
+  border: 1px solid var(--orange);
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+  background: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(10px); 
+  border-radius: 10px; 
+}
+
+/* Input Styling */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
+}
+
+/* Placeholder Text Color */
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
