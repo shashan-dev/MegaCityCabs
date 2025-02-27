@@ -12,7 +12,7 @@
   <title>Mega City Cabs</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
+  <!--  CSS -->
   <link rel="stylesheet" href="./Styles/style.css">
   <!-- CDJNS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,7 +36,7 @@
         <!-- Btns -->
         <div class="buttons">
           <a href="SignIn.jsp" class="btn btn-outline-orange me-2">Sign In</a>
-        <a href="#" class="btn btn-orange me-2">Sign Up</a>
+        <a href="SignUp.jsp" class="btn btn-orange me-2">Sign Up</a>
         </div>
       </div>
     </div>

@@ -168,9 +168,9 @@ footer .fab:hover {
 
 
 
-/*** Sign In JSP***/
+/*** Sign In  & Sign Up JSP***/
 
-/* Background Image for SignIn Page */
+/* Background Image  */
 .signin-page {
  background-image: url('../Assets/bgimage2.jpg');
   background-size: cover; 
@@ -194,6 +194,7 @@ footer .fab:hover {
 .btn-outline-orange.active {
   background-color: var(--orange);
   color: white;
+ 
 }
 
 /* Card Styling */
@@ -221,4 +222,85 @@ footer .fab:hover {
 /* Placeholder Text Color */
 .form-control::placeholder {
   color: rgba(255, 255, 255, 0.5);
+}
+
+/*** Admin Portal Styles ***/
+
+/* General Styles */
+.admin-portal {
+  background-color: #1a1a1a;
+  color: white;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  width: 16.6667%; /* 2 out of 12 columns */
+}
+
+.sidebar .btn-tab  {
+  width: 100%;
+  text-align: left;
+  color: white;
+  margin: 5px 0;
+  padding: 10px;
+  border: none;
+  background: none;
+  transition: background 0.3s ease;
+
+}
+
+.sidebar .btn-tab.active {
+  background-color: var(--orange);
+  color: white;
+}
+
+
+/* Main Content Styles */
+.main-content {
+  margin-left: 16.6667%; /* Offset by sidebar width */
+  padding: 20px;
+}
+
+/* Table Styles */
+.table-dark {
+  background-color: #333;
+}
+
+.table-dark th,
+.table-dark td {
+  border-color: #444;
+}
+
+/* Form Styles */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
+}
+
+/* Button Styles */
+.btn-orange {
+  background-color: var(--orange);
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-orange:hover {
+  background-color: #e68019;
+}
+
+/* Toggle Switch Styles */
+input[type="checkbox"] {
+  transform: scale(1.5);
 }

@@ -60,7 +60,7 @@
         </div>
         <button type="submit" class="btn btn-orange w-100">Sign In</button>
         <hr>
-        <button type="submit" class="btn btn-outline-orange w-100 ">No account? Create one!</button>
+        <p class="text-center">No account? <a href="SignIn.jsp" class="text-orange"> Create one!</a></p>
       </form>
 
       <!-- Employee Login Form -->
