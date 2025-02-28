@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <div class="container d-flex justify-content-center align-items-center p-4">
+    <div class="container d-flex justify-content-center align-items-center p-4 mt-5">
         <div class="card bg-dark text-white p-4" style="width: 100%; max-width: 400px;">
             <h2 class="text-center mb-4 text-orange">Sign Up</h2>
 

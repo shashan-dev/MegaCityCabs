@@ -36,8 +36,8 @@
   <div class="container-fluid">
     <div class="row vh-100">
       <!-- Sidebar for Tabs -->
-      <div class="col-md-3 col-lg-2 bg-dark text-white sidebar">
-        <h2 class="text-center text-orange py-4 fw-bold">Admin Portal</h2>
+      <div class="col-md-3 col-lg-2 bg-dark text-white sidebar mt-5">
+        <h2 class="text-center text-orange py-4 fw-bold pt-4">Admin Portal</h2>
         <ul class="nav flex-column">
           <li class="nav-item">
             <button class="nav-link btn-tab  btn btn-orange w-100 active" data-tab="reservations">Reservations</button>
@@ -55,8 +55,8 @@
       </div>
 
       <!-- Main Content -->
-      <div class="col-md-9 col-lg-10 main-content  ">
-          <hr class="mt-0">
+      <div class="col-md-9 col-lg-10 main-content  mt-5">
+          <hr>
         <!-- Reservations Tab -->
         <div id="reservations" class="tab-content active">
           <h3 class="text-orange mb-4 fw-bold" >Reservations</h3>
