@@ -18,14 +18,14 @@ body{
 
 
 header{
-    background-color: #1A1A1A;
-          position: fixed; /* Fix the header at the top */
-  top: 0;          /* Position at the top of the page */
-  left: 0;         /* Align to the left edge */
-  width: 100%;     /* Full width */
-  z-index: 1000;   /* Ensure it stays above other content */
-  background-color: #1a1a1a; /* Match your theme */
-  padding: 10px 20px; /* Add some padding */
+ background-color: #1A1A1A;
+ position: fixed; 
+  top: 0;          
+  left: 0;         
+  width: 100%;     
+  z-index: 1000;   
+  background-color: #1a1a1a; 
+  padding: 10px 20px; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
 }
 
@@ -183,7 +183,7 @@ footer .fab:hover {
  background-image: url('../Assets/bgimage2.jpg');
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat; 
+  background-repeat:no-repeat; 
   background-color: #000000; 
 }
 
@@ -384,4 +384,42 @@ input[type="checkbox"] {
 
 .btn-orange:hover {
   background-color: #e64a19;
+}
+
+
+/*ALRET*/ 
+.notification{
+    margin-top: 80px;
+
+}
+/* Custom CSS for smaller alerts */
+.small-alert {
+    padding: 0.5rem 1rem; /* Reduce padding */
+    font-size: 0.875rem;   /* Reduce font size */
+    margin-bottom: 0.5rem; /* Reduce margin */
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgba(175, 225, 175, 0.99);
+   
+}
+
+.small-alert .btn-close {
+    padding: 0.5rem 1rem;  /* Adjust close button padding */
+    font-size: 0.75rem;    /* Adjust close button size */
+
+}
+
+.small-alert-error{
+        padding: 0.5rem 1rem; /* Reduce padding */
+    font-size: 0.875rem;   /* Reduce font size */
+    margin-bottom: 0.5rem; /* Reduce margin */
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    background-color: rgba(255, 87, 51, 0.99);
+}
+small-alert-error .btn-close{
+        padding: 0.5rem 0rem;  /* Adjust close button padding */
+    font-size: 0.75rem;    /* Adjust close button size */
 }

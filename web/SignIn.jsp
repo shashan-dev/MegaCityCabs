@@ -16,8 +16,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./Styles/style.css">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="bg-black text-white signin-page">
+
+    
+  
     <header class=" text-white py-3">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
@@ -34,10 +39,21 @@
       </div>
     </div>
   </header>
-    
-    
 
-    
+        <%
+                String registrationStatus = request.getParameter("registration");
+                if (registrationStatus != null && registrationStatus.contains("success")) {
+            %>
+                    <div class="notification alert alert-success alert-dismissible fade show " role="alert">
+                        <strong>Success!</strong> Registration successful. Please sign in.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+            <%
+                }
+            %>
+
+ 
+            
   <div class="container d-flex justify-content-center align-items-center  p-4 mt-5">
     <div class="card bg-dark text-white p-4 " style="width: 100%; max-width: 400px;">
       <h2 class="text-center mb-4 text-orange">Sign In</h2>
