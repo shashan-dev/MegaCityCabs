@@ -18,7 +18,7 @@ import java.util.List;
  * @author Shashan(ShashanPrabo
  */
 public class CityDAO {
-     // Method to fetch distinct city names from the database
+
     public List<String> getDistinctCities() {
         List<String> cities = new ArrayList<>();
         String sql = "SELECT DISTINCT cityName FROM cities"; 

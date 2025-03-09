@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import src.app.model.Customer;
+import java.sql.ResultSet;
 
 /**
  *
@@ -23,7 +24,7 @@ public class CustomerDAO {
         try (Connection conn = DataLayer.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // Set parameters for the SQL query
+     
             pstmt.setString(1, customer.getName());
             pstmt.setString(2, customer.getEmail());
             pstmt.setString(3, customer.getNic());
@@ -33,7 +34,7 @@ public class CustomerDAO {
 
   
             int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0; // Return true if successfully 
+            return rowsAffected > 0; 
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,5 +44,32 @@ public class CustomerDAO {
     }
     
     
-    
+            public Customer validateCustomer(String email, String password) {
+        Customer customer = null;
+        String query = "SELECT * FROM customers WHERE email = ? AND password = ?";
+
+        try (Connection conn = DataLayer.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    customer = new Customer();
+                    customer.setName(rs.getString("name"));
+                    customer.setEmail(rs.getString("email"));
+   
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return customer;
+    }
 }
+    
+    
+    
+

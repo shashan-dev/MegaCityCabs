@@ -33,20 +33,17 @@ public class UserRegistrationServlet extends HttpServlet {
         int userId = 1;
          
 
-        // Create a User object
         User user = new User(userRole, userName, userNIC, userContact, userPassword, userId);
 
      
-        
-        // Register the user using UserDAO
+
         UserDAO userDAO = new UserDAO();
         boolean isRegistered = userDAO.registerUser(user);
 
-        // Redirect based on registration status
         if (isRegistered) {
-            response.sendRedirect("admin?status=success"); // Redirect to SignIn page with success message
+            response.sendRedirect("admin?status=success"); 
         } else {
-            response.sendRedirect("admin?status=failed"); // Redirect back to SignUp page with error message
+            response.sendRedirect("admin?status=failed"); 
         }
     }
 

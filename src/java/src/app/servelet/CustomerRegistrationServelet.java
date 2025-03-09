@@ -33,18 +33,16 @@ public class CustomerRegistrationServelet extends HttpServlet {
         String password = request.getParameter("password");
         
 
-        // Create a Customer object
         Customer customer = new Customer(name, email, nic, mobile, address, password);
         
-        // Register the customer using CustomerDAO
         CustomerDAO customerDAO = new CustomerDAO();
         boolean isRegistered = customerDAO.registerCustomer(customer);
         
         
         if (isRegistered) {
-            response.sendRedirect("SignIn.jsp?registration=success"); // success message
+            response.sendRedirect("SignIn.jsp?registration=success"); 
         } else {
-            response.sendRedirect("SignUp.jsp?error=registration_failed"); // error message
+            response.sendRedirect("SignUp.jsp?error=registration_failed"); 
         }
         
     }

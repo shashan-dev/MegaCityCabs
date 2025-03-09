@@ -52,20 +52,17 @@ public class VehicleAllocationServlt extends HttpServlet {
             }
 
   
-
-        // Create a Vehicle object
         Vehicle vehicle = new Vehicle(vehicleType, vehicleName, vehicleNumber, ownerName, ownerContact, driverId, driverName, city, price);
         
 
-        // Register the vehicle using VehicleDAO
         VehicleDAO vehicleDAO = new VehicleDAO();
         boolean isRegistered = vehicleDAO.allocateVehicle(vehicle);
 
         // Redirect based on registration status
         if (isRegistered) {
-            response.sendRedirect("admin?status=success"); // Redirect to success page
+            response.sendRedirect("admin?status=success"); 
         } else {
-            response.sendRedirect("admin?status=failed"); // Redirect to error page
+            response.sendRedirect("admin?status=failed"); 
         }
         
         

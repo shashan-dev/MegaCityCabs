@@ -399,15 +399,18 @@ input[type="checkbox"] {
     margin-bottom: 0.5rem; /* Reduce margin */
     position: fixed;
     z-index: 1000;
-    width: 100%;
+    width: 25%;
     background-color: rgba(175, 225, 175, 0.99);
+    margin-left: 70%;
+   
    
 }
-
 .small-alert .btn-close {
-    padding: 0.5rem 1rem;  /* Adjust close button padding */
-    font-size: 0.75rem;    /* Adjust close button size */
+    height: 3px;
+}
 
+.small-alert-error .btn-close {
+    height: 3px;
 }
 
 .small-alert-error{
@@ -418,8 +421,78 @@ input[type="checkbox"] {
     z-index: 1000;
     width: 100%;
     background-color: rgba(255, 87, 51, 0.99);
+     width: 25%;
+     margin-left: 70%;
+     color:white
 }
-small-alert-error .btn-close{
-        padding: 0.5rem 0rem;  /* Adjust close button padding */
-    font-size: 0.75rem;    /* Adjust close button size */
+
+
+
+/*  CUSTOMER BOOK */
+.nav-item a{
+   color: white;
+   font-weight: 500
+    
+}
+.nav-item a:hover{
+   color: White; 
+   background-color: transparent
+    
+}
+
+
+
+
+
+ .receipt-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 150px;
+            font-size: 13px
+        }
+        
+                .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .btn-print {
+            margin-right: 10px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Thank You Message Styles */
+.thank-you-message {
+    margin-top: 180px;
+    padding: 20px;
+    background-color: #343a40; /* Dark background to match the table */
+    color: #fff; /* White text */
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.thank-you-message h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffc107; /* Yellow accent color for the heading */
+}
+
+.thank-you-message p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.thank-you-message a {
+    color: #ffc107; /* Yellow accent color for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.thank-you-message a:hover {
+    text-decoration: underline;
 }
