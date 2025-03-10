@@ -172,5 +172,26 @@ public class VehicleDAO {
             return false;
         }
     }
+        
+               public boolean deleteVehicle(String vehiclNo) {
+        String sql = "DELETE FROM vehicles WHERE vehicleNumber = ?"; 
+
+        try (Connection conn = DataLayer.getConnection(); 
+             PreparedStatement pstmt = conn.prepareStatement(sql)) { 
+
+            pstmt.setString(1, vehiclNo);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.err.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    
+}
+               
+ 
+
 
 }

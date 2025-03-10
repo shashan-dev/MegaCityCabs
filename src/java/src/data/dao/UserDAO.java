@@ -158,7 +158,23 @@ public List<Integer> getAllEmpIds() {
             return false;
         }
     }
+       
+       public boolean deleteUser(int userId) {
+        String sql = "DELETE FROM users WHERE id = ?"; 
+
+        try (Connection conn = DataLayer.getConnection(); 
+             PreparedStatement pstmt = conn.prepareStatement(sql)) { 
+
+            pstmt.setInt(1, userId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.err.println("SQL Error: " + e.getMessage());
+            return false;
+        }
     
 }
-
+}
        

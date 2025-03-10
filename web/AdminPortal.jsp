@@ -24,7 +24,7 @@
     </head>
     <body class="admin-portal">
 
-         <header class="text-white py-3 bg-dark">
+        <header class="text-white py-3 bg-dark">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="company-name">
@@ -87,7 +87,7 @@
                     <hr>
                     <!-- Reservations Tab -->
                     <div id="reservations" class="tab-content active">
-                        <h3 class="text-orange mb-4 fw-bold" >Reservations</h3>
+                        <h3 class="text-orange mb-4 fw-bold text-center" >Reservations</h3>
                         <table class="table table-dark table-striped">
                             <thead>
                                 <tr>
@@ -101,47 +101,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               <%
-                                            List<Receipt> allBookings = (List<Receipt>) request.getAttribute("allBookings");
-                                            if (allBookings != null) {
-                                                for (Receipt book : allBookings) {
+                                <%
+                                    List<Receipt> allBookings = (List<Receipt>) request.getAttribute("allBookings");
+                                    if (allBookings != null) {
+                                        for (Receipt book : allBookings) {
 
-                                        %>
-                                        <tr>
-                                            <td><%= book.getOrderNumber() %></td>
-                                            <td><%= book.getClientName() %></td>
-                                            <td><%= book.getStartLocation() %></td>
-                                            <td><%= book.getEndLocation() %></td>
-                                            <td><%= book.getVehicleNumber() %></td>
-                                            <td><%= book.getVehicleName() %></td>
-                                            <td><%= book.getTotalPrice() %></td>
+                                %>
+                                <tr>
+                                    <td><%= book.getOrderNumber()%></td>
+                                    <td><%= book.getClientName()%></td>
+                                    <td><%= book.getStartLocation()%></td>
+                                    <td><%= book.getEndLocation()%></td>
+                                    <td><%= book.getVehicleNumber()%></td>
+                                    <td><%= book.getVehicleName()%></td>
+                                    <td><%= book.getTotalPrice()%></td>
 
-                                        </tr>
-                                        <%
-                                            }
-                                        } else {
-                                        %>
-                                        <tr>
-                                            <td colspan="3" class="text-center">No users found.</td>
-                                        </tr>
-                                        <%
-                                            }
-                                        %>
-                                    </tbody>
+                                </tr>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <tr>
+                                    <td colspan="3" class="text-center">No users found.</td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </tbody>
                             </tbody>
                         </table>
                     </div>
 
-                                    
-                                    
+
+
                     <!-- Vehicle Allocation Tab -->
                     <div id="vehicle-allocation" class="tab-content">
-                        <h3 class="text-orange mb-4 fw-bold fw-bold">Vehicle Allocation</h3>
-                        <div class="row">
+                        <h3 class="text-orange mb-4 fw-bold fw-bold text-center" >Vehicle Allocation</h3>
+                        <div class="row mt-5">
                             <div class="col-md-6">
                                 <h4 class="text-orange">Add New Allocation</h4>
-
-
                                 <form id="addAllocationForm" action="VehicleAllocationServlt" method="POST">
                                     <div class="mb-3">
                                         <label for="alloVehicleNumber" class="form-label">Vehicle </label > <label class="text-secondary font-italic">(Vehicle Numer : Vehicle Name : Vehicle Type)</label>
@@ -197,11 +195,12 @@
                                     </div>
                                     <button type="submit" class="btn btn-orange">Add Allocation</button>
                                 </form>
+                                         
+              
 
-                                        
                             </div>
-                            <div class="col-md-6">
-                                <h4 class="text-orange">Deactivate Allocations</h4>
+                            <div class="mb-3 mt-5">
+                                <h4 class="text-orange">All Allocations</h4>
                                 <table class="table table-dark table-striped">
                                     <thead>
                                         <tr>
@@ -212,6 +211,7 @@
                                             <th>Driver Name</th>
                                             <th>City</th>
                                             <th>Price (per 1KM)</th>
+                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -247,13 +247,13 @@
                         </div>
                     </div>
 
-                                    
-                                    
-                                    
+
+
+
                     <!-- Vehicle Management Tab -->
                     <div id="vehicle-management" class="tab-content">
-                        <h3 class="text-orange mb-4 fw-bold">Vehicle Management</h3>
-                        <div class="row">
+                        <h3 class="text-orange mb-4 fw-bold text-center">Vehicle Management</h3>
+                        <div class="row mt-5">
                             <div class="col-md-6">
                                 <h4 class="text-orange">Add New Vehicle</h4>
                                 <form id="vehicleRegistrationForm" action="VehicleRegistrationServlet" method="POST">
@@ -285,7 +285,7 @@
                                     <button type="submit" class="btn btn-orange">Add Vehicle</button>
                                 </form>
 
-                                
+
                             </div>
                             <div class="col-md-6">
                                 <h4 class="text-orange">Update Vehicle Details</h4>
@@ -293,7 +293,7 @@
                                     <div class="mb-3">
                                         <label for="editVehicleType" class="form-label">Vehicle</label>
                                         <select class="form-control" id="editVehicleType" name="editVehicle" required>
-                                             <option value="">-- Select Vehicle  --</option>
+                                            <option value="">-- Select Vehicle  --</option>
                                             <%
                                                 if (vehicleNo != null) {
                                                     for (String vno : vehicleNo) {
@@ -320,9 +320,9 @@
                                     <button type="submit" class="btn btn-orange">Update Vehicle</button>
                                 </form>
                             </div>
-                                        
-                                        
-                            <div class="mb-3 mt-4">
+
+
+                            <div class="mb-3 mt-5">
                                 <h4 class="text-orange">All Vehicle Details</h4>
                                 <table class="table table-dark table-striped">
                                     <thead>
@@ -332,6 +332,7 @@
                                             <th>Vehicle Type</th>
                                             <th>Owner Name</th>
                                             <th>Owner Contact</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -347,6 +348,7 @@
                                             <td><%= vehicle.getVehicleType()%></td>
                                             <td><%= vehicle.getOwnerName()%></td>
                                             <td><%= vehicle.getOwnerContact()%></td>
+                                            <td><a href="DeleteVehicleServlt?vehicleId=<%= vehicle.getVehicleNumber()%>" class="btn btn-danger">Delete</a></td>
 
                                         </tr>
                                         <%
@@ -365,13 +367,13 @@
                             </div>
                         </div>
                     </div>
-                                    
-                                    
+
+
 
                     <!-- User Management Tab -->
                     <div id="user-management" class="tab-content">
-                        <h3 class="text-orange mb-4 fw-bold">User Management</h3>
-                        <div class="row">
+                        <h3 class="text-orange mb-4 fw-bold text-center">User Management</h3>
+                        <div class="row mt-5">
                             <div class="col-md-6">
                                 <h4 class="text-orange">Add New User</h4>
                                 <form id="addUserForm" action="UserRegistrationServlet" method="POST">
@@ -401,9 +403,9 @@
                                     <button type="submit" class="btn btn-orange">Add User</button>
                                 </form>
                             </div>
-                            
-                            
-                             <div class="col-md-6">
+
+
+                            <div class="col-md-6">
                                 <h4 class="text-orange">Update User Details</h4>
                                 <form id="editUserForm" action="UserUpdateServlt" method="POST">
                                     <div class="mb-3">
@@ -411,7 +413,7 @@
                                         <select class="form-control" id="editUserRole" name="editUserRole" required>
                                             <option value="">-- Select Emp Id  --</option>
                                             <%
-                                                 List<Integer> ids = (List<Integer>) request.getAttribute("Ids");
+                                                List<Integer> ids = (List<Integer>) request.getAttribute("Ids");
                                                 if (ids != null) {
                                                     for (Integer id : ids) {
                                             %>
@@ -442,10 +444,10 @@
                                 </form>
                             </div>
 
-                            
-                            
-                            <div class="mb-3 mt-4">
-                                <h4 class="text-orange">Edit User</h4>
+
+
+                            <div class="mb-3 mt-5">
+                                <h4 class="text-orange">All Users</h4>
                                 <table border="1" class="table table-dark table-striped">
                                     <thead>
                                         <tr>
@@ -454,6 +456,7 @@
                                             <th>Role</th>
                                             <th>NIC</th>
                                             <th>Contact No</th>
+                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -469,6 +472,7 @@
                                             <td><%= user.getUserRole()%></td>
                                             <td><%= user.getUserNIC()%></td>
                                             <td><%= user.getUserContact()%></td>
+                                            <td><a href="DeleteUserServlet?userId=<%= user.getUserId()%>" class="btn btn-danger">Delete</a></td>
 
                                         </tr>
                                         <%
@@ -485,45 +489,45 @@
                                 </table>  
 
                             </div>
-                 
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
 
 
 
-        <!-- Custom JS -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const tabs = document.querySelectorAll(".btn-tab");
-                const tabContents = document.querySelectorAll(".tab-content");
+            <!-- Custom JS -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const tabs = document.querySelectorAll(".btn-tab");
+                    const tabContents = document.querySelectorAll(".tab-content");
 
-                tabs.forEach((tab) => {
-                    tab.addEventListener("click", () => {
-                        const targetTab = tab.getAttribute("data-tab");
-
-
-                        tabs.forEach((t) => t.classList.remove("active"));
-                        tab.classList.add("active");
+                    tabs.forEach((tab) => {
+                        tab.addEventListener("click", () => {
+                            const targetTab = tab.getAttribute("data-tab");
 
 
-                        tabContents.forEach((content) => {
-                            content.style.display = "none";
+                            tabs.forEach((t) => t.classList.remove("active"));
+                            tab.classList.add("active");
+
+
+                            tabContents.forEach((content) => {
+                                content.style.display = "none";
+                            });
+
+
+                            document.getElementById(targetTab).style.display = "block";
                         });
-
-
-                        document.getElementById(targetTab).style.display = "block";
                     });
+
+
+                    document.querySelector(".btn-tab.active")?.click();
                 });
 
-
-                document.querySelector(".btn-tab.active")?.click();
-            });
-
-        </script>
+            </script>
     </body>
 </html>
