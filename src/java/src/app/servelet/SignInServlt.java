@@ -49,7 +49,7 @@ public class SignInServlt extends HttpServlet {
         if (customer != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", customer);
-            resp.sendRedirect("CustomerBooking.jsp");
+            resp.sendRedirect("booking");
         } else {
             resp.sendRedirect("SignIn.jsp?error=login_failed");
 
@@ -78,11 +78,11 @@ public class SignInServlt extends HttpServlet {
             if ("admin".equals(user.getUserRole())) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                resp.sendRedirect("AdminPortal.jsp");
+                resp.sendRedirect("admin");
             } else {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                resp.sendRedirect("DriverPortal.jsp");
+                resp.sendRedirect("driver");
             }
         } else {
             resp.sendRedirect("SignIn.jsp?error=login_failed");

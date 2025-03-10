@@ -1,3 +1,6 @@
+<%@page import="src.app.model.Receipt"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,77 +10,86 @@
         <title>Booking Portal - Mega City Cabs</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./Styles/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body class="booking-portal">
 
-        <header class="text-white py-3">
+        <header class="text-white py-3 bg-dark">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-
                     <div class="company-name">
-                        <h1 class="h3 mb-0 text-orange fw-bold"><a href="index.jsp" class="header-link">Mega City Cabs</a></h1>
+                        <h1 class="h3 mb-0 text-orange fw-bold">
+                            <a href="" class="header-link text-decoration-none text-orange">Mega City Cabs</a>
+                        </h1>
                     </div>
-
                     <div class="contact-info d-none d-md-block">
-                        <p class="mb-0">Welcome <span class="text-orange"> ${sessionScope.user.name}</span></p>
+                        <p class="mb-0">Hi, <span class="text-orange">${sessionScope.user.name}</span></p>
                     </div>
+                    <a href="LogOutServlt" class="btn btn-orange btn-sm">Logout</a>
                 </div>
             </div>
         </header>
 
         <div class="container mt-5 w-50 pt-5">
-            <ul class="nav nav-tabs" id="bookingTabs">
-                <li class="nav-item">
-                    <a class="nav-link btn-tab btn btn-orange w-100 active" id="newBookingTab" href="#" onclick="showTab('newBooking')">New Booking</a>
+            <ul class="nav nav-tabs" id="bookingTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="newBookingTab" data-bs-toggle="tab" href="#newBooking" role="tab" aria-selected="true">New Booking</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link btn-tab btn btn-orange w-100" id="bookingHistoryTab" href="#" onclick="showTab('bookingHistory')">Booking History</a>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="bookingHistoryTab" data-bs-toggle="tab" href="#bookingHistory" role="tab" aria-selected="false">Booking History</a>
                 </li>
             </ul>
 
-            <div id="newBooking" class="tab-content mt-3">
-                <h2 class="text-orange text-center">New Booking</h2>
-
-                <!-- Step 1: Select Route & Vehicle Type -->
-                <form action="booking" method="post">
-                    <input type="hidden" name="action" value="step1">
-                    <div id="step1" class="booking-step">
+            <div class="tab-content mt-3">
+                <!-- New Booking Tab -->
+                <div class="tab-pane fade show active" id="newBooking" role="tabpanel">
+                    <h2 class="text-orange text-center">New Booking</h2>
+                    <form action="booking" method="post">
+                        <input type="hidden" name="action" value="step1">
                         <div class="mb-3">
                             <h4>Step 1: Select Route & Vehicle Type</h4>
                         </div>
+
                         <div class="mb-3">
                             <label>Pickup</label>
                             <select id="startLocation" class="form-control" name="startLocation">
-                                <option value="Colombo">Colombo</option>
-                                <option value="cityB">City B</option>
-                                <option value="cityC">City C</option>
+
+                                <option value="">-- Select City --</option>
+                                <% List<String> cities = (List<String>) request.getAttribute("cities");
+                                    if (cities != null) {
+                                        for (String city : cities) {%>
+                                <option value="<%= city%>"><%= city%></option>
+                                <% }
+                                    } %>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label>Drop</label>
                             <select id="endLocation" class="form-control" name="endLocation">
-                                <option value="Gampaha">Gampaha</option>
-                                <option value="cityB">City B</option>
-                                <option value="cityC">City C</option>
+                                <option value="">-- Select City --</option>
+                                <% List<String> dropCities = (List<String>) request.getAttribute("Dropcities");
+                                    if (dropCities != null) {
+                                        for (String dropCity : dropCities) {%>
+                                <option value="<%= dropCity%>"><%= dropCity%></option>
+                                <% }
+                                    } %>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label>Vehicle Type</label>
                             <select id="vehicleType" class="form-control" name="vehicleType">
-                                <option value="sedan">Sedan</option>
-                                <option value="suv">SUV</option>
-                                <option value="van">Van</option>
+                                <option value="">-- Select Vehicle Type --</option>
+                                <% List<String> vehicles = (List<String>) request.getAttribute("vehicleTypes");
+                                    if (vehicles != null) {
+                                        for (String vehicle : vehicles) {%>
+                                <option value="<%= vehicle%>"><%= vehicle%></option>
+                                <% }
+                                    }%>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-orange mt-3">Find</button>
-                        </div>
-                    </div>
-                </form>
-
-
-
-
+                        <button type="submit" class="btn btn-orange mt-3">Find</button>
+                    </form>
+                </div>
                 <div id="step2" class="booking-step" style="display: <%= request.getAttribute("vehicleNames") != null ? "block" : "none"%>;">
                     <div class="mb-3">
                         <h4>Step 2: Select Vehicle & Payment</h4>
@@ -89,6 +101,7 @@
                         <input type="hidden" name="startLocation" value="<%= request.getParameter("startLocation")%>">
                         <input type="hidden" name="endLocation" value="<%= request.getParameter("endLocation")%>">
                         <input type="hidden" name="vehicleType" value="<%= request.getParameter("vehicleType")%>">
+
 
                         <div class="mb-3">
                             <label>Vehicle Name</label>
@@ -139,16 +152,61 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href = 'CustomerBooking.jsp'">Back</button>
+                            <input type="hidden" name="userName" value="${sessionScope.user.name}">
+                            <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href = 'booking'">Back</button>
                             <button type="submit" class="btn btn-orange mt-3">Submit</button>
                         </div>
                     </form>
                 </div>
 
 
+                <!-- Booking History Tab -->
+                <div class="tab-pane fade" id="bookingHistory" role="tabpanel">
+                    <h2 class="text-orange text-center">Booking History</h2>
+                    <table class="table table-bordered text-white">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Date & Time</th>
+                                <th>Pickup Location</th>
+                                <th>Drop Location</th>
+                                <th>Vehicle Name</th>
+                                <th>Mileage (KM)</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<Receipt> myBooking = (List<Receipt>) request.getAttribute("myBooking");
+                                if (myBooking != null) {
+                                    for (Receipt mybook : myBooking) {
 
+                            %>
+                            <tr>
+                                <td><%= mybook.getOrderNumber()%></td>
+                                <td><%= mybook.getBookingDateTime()%></td>
+                                <td><%= mybook.getStartLocation()%></td>
+                                <td><%= mybook.getEndLocation()%></td>
+                                <td><%= mybook.getVehicleName()%></td>
+                                <td><%= mybook.getKmCount()%></td>
+                                <td><%= mybook.getTotalPrice()%></td>
 
+                            </tr>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="7" class="text-center">No bookings found.</td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </body>
 </html>

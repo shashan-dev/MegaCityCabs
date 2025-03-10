@@ -4,6 +4,8 @@
     Author     : Shashan(ShashanPrabo
 --%>
 
+<%@page import="src.app.model.Receipt"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,15 +17,18 @@
         <link rel="stylesheet" href="./Styles/style.css">
     </head>
     <body class="booking-portal">
-        <header class="text-white py-3">
+        <header class="text-white py-3 bg-dark">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="company-name">
-                        <h1 class="h3 mb-0 text-orange fw-bold"><a href="index.jsp" class="header-link">Mega City Cabs</a></h1>
+                        <h1 class="h3 mb-0 text-orange fw-bold">
+                            <a href="" class="header-link text-decoration-none text-orange">Mega City Cabs</a>
+                        </h1>
                     </div>
                     <div class="contact-info d-none d-md-block">
-                        <p class="mb-0">Welocme <span class="text-orange">Driver 1!</span></p>
+                        <p class="mb-0">Hi, <span class="text-orange">${sessionScope.user.userName}</span></p>
                     </div>
+                    <a href="LogOutServlt" class="btn btn-orange btn-sm">Logout</a>
                 </div>
             </div>
         </header>
@@ -37,9 +42,11 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link btn-tab  btn btn-orange w-100 active" data-tab="assign-me">Assigned to Me</a>
                         </li>
+                        <!-- comment 
                         <li class="nav-item">
                             <a href="#" class="nav-link btn-tab  btn btn-orange w-100" data-tab="my-history">My History</a>
                         </li>
+                          -->
                     </ul>
 
                 </div>
@@ -50,32 +57,47 @@
 
                     <div id="assign-me" class="tab-content active">
                         <h3 class="text-orange mb-4 fw-bold">Assigned to Me</h3>
-                        <table class="table table-dark table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Booking ID</th>
-                                    <th>Start Location</th>
-                                    <th>End Location</th>
-                                    <th>Vehicle Type</th>
-                                    <th>Vehicle Name</th>
-                                    <th>Date & Time</th>
-                                    <th>Payment Method</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <table class="table table-bordered text-white">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Date & Time</th>
+                                <th>Pickup Location</th>
+                                <th>Drop Location</th>
+                                <th>Client Name</th>
+                                <th>Vehicle Number</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                List<Receipt> myBooking = (List<Receipt>) request.getAttribute("driverBooking");
+                                if (myBooking != null) {
+                                    for (Receipt mybook : myBooking) {
 
-                                <tr>
-                                    <td>001</td>
-                                    <td>City A</td>
-                                    <td>City B</td>
-                                    <td>Sedan</td>
-                                    <td>Sedan 1</td>
-                                    <td>2023-10-01 10:00</td>
-                                    <td>Credit Card</td>
-                                </tr>
+                            %>
+                            <tr>
+                                <td><%= mybook.getOrderNumber()%></td>
+                                <td><%= mybook.getBookingDateTime()%></td>
+                                <td><%= mybook.getStartLocation()%></td>
+                                <td><%= mybook.getEndLocation()%></td>
+                                <td><%= mybook.getClientName() %></td>
+                                <td><%= mybook.getVehicleNumber() %></td>
+                                <td><%= mybook.getTotalPrice()%></td>
 
-                            </tbody>
-                        </table>
+                            </tr>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="7" class="text-center">No bookings found.</td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
 
                     </div>
                     <!-- My HistoryTab -->
@@ -95,24 +117,7 @@
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>001</td>
-                                    <td>City A</td>
-                                    <td>City B</td>
-                                    <td>Sedan</td>
-                                    <td>Sedan 1</td>
-                                    <td>2023-10-01 10:00</td>
-                                    <td>Credit Card</td>
-                                </tr>
-                                <tr>
-                                    <td>001</td>
-                                    <td>City A</td>
-                                    <td>City B</td>
-                                    <td>Sedan</td>
-                                    <td>Sedan 1</td>
-                                    <td>2023-10-01 10:00</td>
-                                    <td>Credit Card</td>
-                                </tr>
+                             
 
                             </tbody>
                         </table>

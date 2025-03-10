@@ -40,4 +40,27 @@ public class CityDAO {
         return cities;
     }
     
+        public List<String> getDistinctDropCities() {
+        List<String> Dropcities = new ArrayList<>();
+        String sql = "SELECT DISTINCT EndCity FROM cities"; 
+        
+        try (Connection conn = DataLayer.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String cityName = rs.getString("EndCity");
+                Dropcities.add(cityName);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return Dropcities;
+    }
+    
+   
+    
 }

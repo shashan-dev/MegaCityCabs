@@ -80,8 +80,8 @@
         </table>
         <hr>
         <div class="text-center">
-            <button class="btn btn-primary btn-print" onclick="window.print()">Print</button>
-            <a href="index.jsp" class="btn btn-secondary">Home</a>
+            <button class="btn btn-orange btn-print" onclick="window.print()">Print</button>
+            <a href="booking" class="btn btn-secondary">Home</a>
         </div>
     </div>
             

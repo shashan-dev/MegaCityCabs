@@ -100,6 +100,7 @@ public class UserDAO {
                     user = new User();
                     user.setUserName(rs.getString("name"));
                     user.setUserRole(rs.getString("role"));
+                    user.setUserId(empID);
 
                 }
             }
@@ -109,4 +110,55 @@ public class UserDAO {
 
         return user;
     }
+    
+public List<Integer> getAllEmpIds() {
+    List<Integer> empIds = new ArrayList<>();
+    String sql = "SELECT id FROM users ORDER BY id DESC"; 
+
+    try (Connection conn = DataLayer.getConnection(); 
+         PreparedStatement pstmt = conn.prepareStatement(sql); 
+         ResultSet rs = pstmt.executeQuery()) { 
+
+       
+        while (rs.next()) {
+            int id = rs.getInt("id"); 
+            empIds.add(id); 
+        }
+
+    } catch (SQLException e) {
+      
+        e.printStackTrace();
+        System.err.println("SQL Error: " + e.getMessage());
+    }
+
+
+    return empIds;
 }
+
+
+       public boolean updateUser(User user) {
+        String sql = "UPDATE users  SET name = ?, nic = ?, contact = ?, password = ? WHERE id = ?";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, user.getUserName());
+            pstmt.setString(2, user.getUserNIC());
+            pstmt.setString(3, user.getUserContact());
+            pstmt.setString(4, user.getUserPassword());
+            pstmt.setInt(5, user.getUserId());
+            
+     
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+}
+
+       

@@ -131,5 +131,46 @@ public class VehicleDAO {
 
         return vehicleAllocations;
     }
+    
+        public List<String> getDistinctVehicleType() {
+        List<String> vehicles = new ArrayList<>();
+        String sql = "SELECT DISTINCT vehicleType  FROM vehicles";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String VehicleNo = rs.getString("vehicleType");
+                vehicles.add(VehicleNo);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return vehicles;
+    }
+        
+        public boolean updateVehicle(Vehicle vehicle) {
+        String sql = "UPDATE vehicles  SET vehicleName = ?, ownerName = ?, ownerContact = ? WHERE vehicleNumber = ?";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, vehicle.getVehicleName());
+            pstmt.setString(2, vehicle.getOwnerName());
+            pstmt.setString(3, vehicle.getOwnerContact());
+            pstmt.setString(4, vehicle.getVehicleNumber());
+            
+     
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
 
 }

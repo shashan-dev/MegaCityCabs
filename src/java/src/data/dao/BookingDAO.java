@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import src.app.model.Booking;
 import src.app.model.Receipt;
 import src.app.model.Vehicle;
 import src.data.utils.DataLayer;
 
 public class BookingDAO {
+    
+    
 
     public List<String> getVehicleNames(String startLocation, String vehicleType) throws SQLException {
         List<String> vehicleNames = new ArrayList<>();
@@ -37,7 +40,7 @@ public class BookingDAO {
         return vehicleNames;
     }
 
-    public int saveBooking(Booking booking) throws SQLException {
+    public int saveBooking(Booking booking, String userName) throws SQLException {
 
         Vehicle vehicle = getAllocatedVehicleDetails(booking.getVehicleType(), booking.getVehicleName(), booking.getStartLocation());
         if (vehicle == null) {
@@ -59,6 +62,7 @@ public class BookingDAO {
                 + ", vehicleName=" + booking.getVehicleName()
                 + ", bookingDateTime=" + booking.getBookingDateTime()
                 + ", paymentType=" + booking.getPaymentMethod());
+        System.out.println(userName);
 
         try (Connection conn = DataLayer.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) { // Fix: Add RETURN_GENERATED_KEYS
             ps.setString(1, booking.getStartLocation());
@@ -67,7 +71,7 @@ public class BookingDAO {
             ps.setString(4, booking.getVehicleName());
             ps.setTimestamp(5, booking.getBookingDateTime());
             ps.setString(6, booking.getPaymentMethod());
-            ps.setString(7, "user");
+            ps.setString(7, userName);
             ps.setFloat(8, vehicle.getPrice());
             ps.setInt(9, vehicle.getDriverId());
             ps.setString(10, vehicle.getDrivrName());
@@ -167,8 +171,8 @@ public class BookingDAO {
             ps.setInt(1, orderNumber);
 
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) { // Use while loop to handle multiple rows (if applicable)
-                    Receipt receipt = new Receipt(); // Create a new Receipt object for each row
+                while (rs.next()) { 
+                    Receipt receipt = new Receipt(); 
 
                     // Populate the Receipt object with data from the ResultSet
                     receipt.setOrderNumber(rs.getInt("bookingId"));
@@ -185,7 +189,7 @@ public class BookingDAO {
 
                     receipt.setPaymentMethod(rs.getString("paymentType"));
 
-                    receipts.add(receipt); // Add the Receipt object to the list
+                    receipts.add(receipt); 
                 }
             }
         }
@@ -194,7 +198,118 @@ public class BookingDAO {
             throw new SQLException("Booking not found for order number: " + orderNumber);
         }
 
-        return receipts; // Return the list of Receipt objects
+        return receipts; 
     }
 
+    
+       public List<Receipt> getMyBooking(String userName) throws SQLException {
+        List<Receipt> receipts = new ArrayList<>(); // List to store Receipt objects
+        String sql = "SELECT * FROM bookingdetails WHERE clientName = ? ORDER BY bookingId DESC";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, userName);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) { 
+                    Receipt receipt = new Receipt(); 
+
+                    // Populate the Receipt object with data from the ResultSet
+                    receipt.setOrderNumber(rs.getInt("bookingId"));
+                    receipt.setClientName(rs.getString("clientName"));
+                    receipt.setStartLocation(rs.getString("startLocation"));
+                    receipt.setEndLocation(rs.getString("endLocation"));
+                    receipt.setBookingDateTime(rs.getTimestamp("bookingDateTime"));
+                    receipt.setVehicleNumber(rs.getString("vehicleNo"));
+                    receipt.setVehicleType(rs.getString("vehicleType"));
+                    receipt.setVehicleName(rs.getString("vehicleName"));
+                    receipt.setKmCount(rs.getFloat("mileage"));
+                    receipt.setPricePerKm(rs.getFloat("amount"));
+                    receipt.setTotalPrice(rs.getFloat("mileage") * rs.getFloat("amount"));
+
+                    receipt.setPaymentMethod(rs.getString("paymentType"));
+
+                    receipts.add(receipt); 
+                }
+            }
+        }
+
+        if (receipts.isEmpty()) {
+            throw new SQLException("Booking not found for: " + userName);
+        }
+
+        return receipts; 
+    }
+       
+       
+        public List<Receipt> getDriverBooking(int userId) throws SQLException {
+        List<Receipt> receipts = new ArrayList<>(); // List to store Receipt objects
+        String sql = "SELECT * FROM bookingdetails WHERE driverID = ? ORDER BY bookingId DESC";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) { 
+                    Receipt receipt = new Receipt(); 
+
+                    receipt.setOrderNumber(rs.getInt("bookingId"));
+                    receipt.setClientName(rs.getString("clientName"));
+                    receipt.setStartLocation(rs.getString("startLocation"));
+                    receipt.setEndLocation(rs.getString("endLocation"));
+                    receipt.setBookingDateTime(rs.getTimestamp("bookingDateTime"));
+                    receipt.setVehicleNumber(rs.getString("vehicleNo"));
+                    receipt.setVehicleType(rs.getString("vehicleType"));
+                    receipt.setVehicleName(rs.getString("vehicleName"));
+                    receipt.setKmCount(rs.getFloat("mileage"));
+                    receipt.setPricePerKm(rs.getFloat("amount"));
+                    receipt.setTotalPrice(rs.getFloat("mileage") * rs.getFloat("amount"));
+                    receipt.setPaymentMethod(rs.getString("paymentType"));
+
+                    receipts.add(receipt); 
+                }
+            }
+        }
+
+        if (receipts.isEmpty()) {
+            throw new SQLException("Booking not found for");
+        }
+
+        return receipts; 
+    }
+        
+         public List<Receipt> getAllBooking() throws SQLException {
+        List<Receipt> receipts = new ArrayList<>(); // List to store Receipt objects
+        String sql = "SELECT * FROM bookingdetails ORDER BY bookingId DESC";
+
+        try (Connection conn = DataLayer.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+  
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) { 
+                    Receipt receipt = new Receipt(); 
+
+                    receipt.setOrderNumber(rs.getInt("bookingId"));
+                    receipt.setClientName(rs.getString("clientName"));
+                    receipt.setStartLocation(rs.getString("startLocation"));
+                    receipt.setEndLocation(rs.getString("endLocation"));
+                    receipt.setBookingDateTime(rs.getTimestamp("bookingDateTime"));
+                    receipt.setVehicleNumber(rs.getString("vehicleNo"));
+                    receipt.setVehicleType(rs.getString("vehicleType"));
+                    receipt.setVehicleName(rs.getString("vehicleName"));
+                    receipt.setKmCount(rs.getFloat("mileage"));
+                    receipt.setPricePerKm(rs.getFloat("amount"));
+                    receipt.setTotalPrice(rs.getFloat("mileage") * rs.getFloat("amount"));
+                    receipt.setPaymentMethod(rs.getString("paymentType"));
+
+                    receipts.add(receipt); 
+                }
+            }
+        }
+
+        if (receipts.isEmpty()) {
+            throw new SQLException("Booking not found for");
+        }
+
+        return receipts; 
+    }
 }

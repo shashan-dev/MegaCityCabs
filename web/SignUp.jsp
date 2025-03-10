@@ -47,7 +47,7 @@
                 <!-- Customer Registration Form -->
                 <form id="signupForm" action="CustomerRegistrationServelet" method="POST">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label">User Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="mb-3">
