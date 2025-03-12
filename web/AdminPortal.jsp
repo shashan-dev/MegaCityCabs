@@ -88,6 +88,9 @@
                     <!-- Reservations Tab -->
                     <div id="reservations" class="tab-content active">
                         <h3 class="text-orange mb-4 fw-bold text-center" >Reservations</h3>
+                        <div class="mb-3">
+                        <input type="text" id="orderNoFilter" class="form-control" placeholder="Search by Order Number">
+                        </div>
                         <table class="table table-dark table-striped">
                             <thead>
                                 <tr>
@@ -108,7 +111,7 @@
 
                                 %>
                                 <tr>
-                                    <td><%= book.getOrderNumber()%></td>
+                                    <td class="orderNo"><%= book.getOrderNumber() %></td>
                                     <td><%= book.getClientName()%></td>
                                     <td><%= book.getStartLocation()%></td>
                                     <td><%= book.getEndLocation()%></td>
@@ -122,7 +125,7 @@
                                 } else {
                                 %>
                                 <tr>
-                                    <td colspan="3" class="text-center">No users found.</td>
+                                    <td colspan="3" class="text-center">No bookings found.</td>
                                 </tr>
                                 <%
                                     }
@@ -527,6 +530,27 @@
 
                     document.querySelector(".btn-tab.active")?.click();
                 });
+                
+              
+    // Filter
+       document.getElementById("orderNoFilter").addEventListener("input", function () {
+      
+        const filterValue = this.value.toLowerCase();
+
+        const rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            const orderNoCell = row.querySelector(".orderNo");
+            if (orderNoCell) {
+                const orderNo = orderNoCell.textContent.toLowerCase();
+                if (orderNo.includes(filterValue)) {
+                    row.style.display = ""; 
+                } else {
+                    row.style.display = "none"; 
+                }
+            }
+        });
+    });
 
             </script>
     </body>

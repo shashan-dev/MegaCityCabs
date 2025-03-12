@@ -163,10 +163,13 @@
                 <!-- Booking History Tab -->
                 <div class="tab-pane fade" id="bookingHistory" role="tabpanel">
                     <h2 class="text-orange text-center">Booking History</h2>
+                    <div class="mb-3">
+                        <input type="text" id="orderNoFilter" class="form-control" placeholder="Search by Order Number">
+                        </div>
                     <table class="table table-bordered text-white">
                         <thead>
                             <tr>
-                                <th>Booking ID</th>
+                                <th>Order No</th>
                                 <th>Date & Time</th>
                                 <th>Pickup Location</th>
                                 <th>Drop Location</th>
@@ -183,7 +186,7 @@
 
                             %>
                             <tr>
-                                <td><%= mybook.getOrderNumber()%></td>
+                                <td class="orderNo"><%= mybook.getOrderNumber()%></td>
                                 <td><%= mybook.getBookingDateTime()%></td>
                                 <td><%= mybook.getStartLocation()%></td>
                                 <td><%= mybook.getEndLocation()%></td>
@@ -208,5 +211,26 @@
             </div>
         </div>
 
+                           
+<script>
+       document.getElementById("orderNoFilter").addEventListener("input", function () {
+      
+        const filterValue = this.value.toLowerCase();
+
+        const rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            const orderNoCell = row.querySelector(".orderNo");
+            if (orderNoCell) {
+                const orderNo = orderNoCell.textContent.toLowerCase();
+                if (orderNo.includes(filterValue)) {
+                    row.style.display = ""; 
+                } else {
+                    row.style.display = "none"; 
+                }
+            }
+        });
+    });
+ </script>
     </body>
 </html>

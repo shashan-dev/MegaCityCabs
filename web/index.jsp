@@ -35,6 +35,7 @@
                         <a href="SignIn.jsp" class="btn btn-outline-orange me-2">Sign In</a>
                         <a href="SignUp.jsp" class="btn btn-orange me-2">Sign Up</a>
                     </div>
+                     
                 </div>
             </div>
         </header>
@@ -178,7 +179,10 @@
                             </li>
                         </ul>
                     </div>
+                    
+          
                 </div>
+                
 
                 <!-- User Guide Link -->
                 <div class="text-center mt-4">
