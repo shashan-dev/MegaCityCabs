@@ -186,7 +186,7 @@
 
                 <!-- User Guide Link -->
                 <div class="text-center mt-4">
-                    <a href="Booking.jsp" class="text-white text-decoration-none"><i class="fa fa-book"></i> User Guide</a>
+                    <a href="UserGuide.jsp" class="text-white text-decoration-none"><i class="fa fa-book"></i> User Guide</a>
                 </div>
 
                 <!-- Copyright Notice -->
